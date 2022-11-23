@@ -1,9 +1,18 @@
 #include <iostream>
-
 using namespace std;
+
+
+/*
+1.指针
+2.指针数组
+3.引用
+4.const
+5.返回数组指针
+*/
+
 void func()
 {
-        //1.指针
+    //1.指针
     int  var = 20;   // 实际变量的声明
     int* ip;        // 指针变量的声明
     ip = &var;       // 在指针变量中存储 var 的地址
@@ -106,9 +115,64 @@ void func5()
     r1 = 10;
     //无法修改r2的值，r2是被赋予了一个临时变量的值
 }
+
+
+//5.返回数组指针
+// 返回数组指针
+// 对两个数组按位置相加
+/*注意函数在执行后其中的变量会被删除，所以数组必须是全局变量或者静态变量，因为返回值
+是数组的第一个值的地址，后面的会全部被删除*/
+
+// int (*array_point(int val1[10],int val2[10]))[10]
+// {
+
+// 	static int val3[10];
+// 	for(int i=0;i<10;i++)
+// 	{
+// 		val3[i]=val2[i]+val1[i];
+// 	}
+// 	return &val3;
+// }
+// void array_func()
+// {
+//     int val1[10];
+//     int val2[10];
+// 	for(int i=0;i<10;i++)
+// 	{
+// 		val1[i]=(i+1)*2;
+// 		val2[i]=(i+2)*3;
+// 	} 
+// 	int (*plt)[10]=array_point();
+// 	for(int i=0;i<10;i++)
+// 	{
+// 		cout<<(**plt)++<<endl;
+// 	}
+// }
+
+static int arry[10] = {1,2,3,4,5,6,7,8,9,10};
+int (*fun())[10]
+{       
+    cout<<&arry<<endl;
+    for(int i=0;i<10;i++)
+    {
+        arry[i]=arry[i]*3;
+    }
+    cout<<&arry<<endl;
+	return &arry;
+}
+void func49()
+{
+    int (*p)[10] = fun();
+	for(int i=0;i<10;i++)
+	{
+		cout<<*(*p++)<<" ";
+	}
+	    cout<<endl;
+}
+
+
 int main()
 {
-    func3();
-    func4();
+    func49();
     return 0;
 }
